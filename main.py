@@ -4,6 +4,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 from glicko import update_user_score_glicko2
+import os
+import uvicorn
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 app = FastAPI(
     title="Glicko评分更新API", 
@@ -227,4 +233,5 @@ async def root():
         "documentation": "/docs",
         "api_info": "/info",
         "health_check": "/health"
+
     }
